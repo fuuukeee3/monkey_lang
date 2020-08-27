@@ -60,3 +60,15 @@ func (i *Identifier) expressionNode() {}
 
 // TokenLiteral is ノードが関連づけられているトークンのリテラルを返す
 func (i *Identifier) TokenLiteral() string { return i.Token.Literal }
+
+// ReturnStatement is return文の構造体
+type ReturnStatement struct {
+	Token       token.Token
+	ReturnValue Expression
+}
+
+// statementNode is
+func (rs *ReturnStatement) statementNode() {}
+
+// TokenLiteral is
+func (rs *ReturnStatement) TokenLiteral() string { return rs.Token.Literal }
