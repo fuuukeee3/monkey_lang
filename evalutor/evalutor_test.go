@@ -8,13 +8,15 @@ import (
 	"github.com/fuuukeee3/monkey_lang/parser"
 )
 
-func TestIntegerExpression(t *testing.T) {
+func TestEvaltIntegerExpression(t *testing.T) {
 	tests := []struct {
 		input    string
 		expected int64
 	}{
 		{"5", 5},
 		{"10", 10},
+		{"-5", -5},
+		{"-10", -10},
 	}
 
 	for _, tt := range tests {
@@ -74,4 +76,23 @@ func testBooleanObject(t *testing.T, obj object.Object, expected bool) bool {
 	}
 
 	return true
+}
+
+func TestBangOperator(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected bool
+	}{
+		{"!true", false},
+		{"!false", true},
+		{"!5", false},
+		{"!!true", true},
+		{"!!false", false},
+		{"!!5", true},
+	}
+
+	for _, tt := range tests {
+		evaluted := testEval(tt.input)
+		testBooleanObject(t, evaluted, tt.expected)
+	}
 }
